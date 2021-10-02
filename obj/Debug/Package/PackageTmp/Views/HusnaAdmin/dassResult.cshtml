@@ -1,0 +1,137 @@
+﻿@model IEnumerable<MHRS.Models.DassForm>
+@{
+    ViewBag.Title = "dassResult";
+    Layout = "~/Views/Shared/_LayoutHusna.cshtml";
+}
+
+
+
+<script src="~/Scripts/chart/exporting.js"></script>
+<script src="~/Scripts/chart/highcharts.js"></script>
+
+<h1>
+    <center>
+        Depression Anxiety Stress Scales (DASS) - Student Report
+    </center>
+</h1>
+
+<div class="jumbotron">
+    <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+</div>
+
+<script>
+    //get json data
+    $(document).ready(function () {
+        $.getJSON("/HusnaAdmin/GetDataDASS", function (data) {
+
+            Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Condition'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b> <br>Students: {point.y}'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Students',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Stress',
+                        y: data.Stress
+                    }, {
+                        name: 'Depression',
+                        y: data.Depression
+                    }, {
+                        name: 'Anxiety',
+                        y: data.Anxiety
+                    }]
+                }]
+            });
+        });
+    });
+
+</script>
+<table class="table">
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result_Stress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result_Anxiety)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result_Depression)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Condition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            Action
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Form_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result_Stress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result_Anxiety)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result_Depression)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "DetailsDass", new { id = item.Form_ID }) |
+                @Html.ActionLink("Delete", "DeleteDass", new { id = item.Form_ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

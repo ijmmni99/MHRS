@@ -1,0 +1,128 @@
+﻿@model IPagedList<MHRS.Models.Student>
+@{
+    ViewBag.Title = "IndexStudentAdmin";
+    Layout = "~/Views/Shared/_LayoutHusna.cshtml";
+}
+
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    @Html.Raw(TempData["createStudent"]);
+    @Html.Raw(TempData["updateStudent"]);
+    @Html.Raw(TempData["deleteStudent"]);
+}
+
+<h1>@Html.ActionLink("STUDENT MANAGEMENT", "IndexStudentAdmin")</h1>
+
+<br />
+
+@using (Html.BeginForm("IndexStudentAdmin", "HusnaAdmin", FormMethod.Get))
+{
+    <text>Search by first name:</text>
+    <br />
+
+    @Html.TextBox("search")
+    <button type="submit">Search</button>
+}
+
+<br />
+
+<p>
+    <b>
+        <h3>
+            @Html.ActionLink("Add New Student", "CreateStudent")
+        </h3>
+    </b>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Student_ID)
+        </th>
+        <th>
+            Student Name
+
+            @* @Html.DisplayNameFor(model => model.First().Fname)  @Html.DisplayNameFor(model => model.First().Lname)*@
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.First().Faculty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Course)
+        <th>
+            @Html.DisplayNameFor(model => model.First().Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Phone_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        <th>
+            Action
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="3" style="color:red">
+                No Match
+            </td>
+        </tr>
+    }
+    else
+    {
+
+        foreach (var item in Model)
+
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student_ID).ToString().ToUpper()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fname).ToString().ToUpper()  @Html.DisplayFor(modelItem => item.Lname).ToString().ToUpper()
+
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Faculty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course).ToString().ToUpper()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Semester)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone_No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email).ToString().ToUpper()
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditStudent", new { id = item.Student_ID }) <br />
+                    @Html.ActionLink("Details", "DetailsStudent", new { id = item.Student_ID }) <br />
+                    @Html.ActionLink("Delete", "DeleteStudent", new { id = item.Student_ID })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+@Html.PagedListPager(Model, i => Url.Action("IndexStudentAdmin", "HusnaAdmin", new { i, search = Request.QueryString["search"] }),
+new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })

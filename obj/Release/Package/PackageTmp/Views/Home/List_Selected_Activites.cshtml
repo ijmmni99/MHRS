@@ -1,0 +1,84 @@
+﻿@model List<MHRS.Models.Recommended_Activity>
+@{
+    ViewBag.Title = "List_Selected_Activites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Html.Raw(TempData["msg"]);
+}
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Recommended Activities</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.isStaff)
+{
+    <p>@Html.ActionLink("Recommend New Activity", "Create_Recommended_Activity", new { id = ViewBag.SessionID })</p>
+}
+<br />
+
+<section>
+    <div class="container-fluid primary-button">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="default-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Poster</th>
+                                <th>Title</th>
+                                <th>Start Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (item.Activity.Activity_Image != null)
+                                        {
+                                            string imageBase64 = Convert.ToBase64String(item.Activity.Activity_Image);
+                                            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+
+                                            <img src="@imageSrc" style="width: 50%" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Scripts/images/images.png" />
+                                        }
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Activity.Activity_Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Activity.Activity_Date)</td>
+
+                                    @if (ViewBag.isStaff)
+                                    {
+                                        <td>
+                                            @Html.ActionLink("View", "Activity", "Activity", new { id = Session["staffid"].ToString() }, new { @class = "button" })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Remove", "Remove_Recommended_Activity", new { id = item.RA_ID }, new { @class = "button" })
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @Html.ActionLink("View", "List_Activity", "Student", new { studentid = Session["studentid"].ToString() }, new { @class = "button" })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Join", "Join_Recommended_Activity", new { id = item.Activity_ID, sessionerr = ViewBag.SessionID }, new { @class = "button" })
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

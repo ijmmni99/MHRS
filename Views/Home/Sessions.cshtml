@@ -1,0 +1,201 @@
+﻿@model MHRS.Models.Session
+
+@{
+    ViewBag.Title = "Sessions";
+    @Html.Raw(TempData["msg"]);
+}
+
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Counseling Session</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<section class="main-banner">
+    <div class="container-fluid">
+            <div class="col-md-12">
+                <div class="banner-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="banner-caption">
+                                <table>
+                                    <thead>
+                                        @{
+                                            if (ViewBag.currentuser == "staff")
+                                            {
+                                                <tr>
+                                                    <th>Student Name</th>
+                                                    <th>Status</th>
+                                                    <th>Faculty</th>
+                                                    <th>Section</th>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <th>Counselor Name</th>
+                                                    <th>Designation</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                </tr>
+                                            }
+                                        }
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            if (ViewBag.currentuser == "staff")
+                                            {
+                                                <tr>
+                                                    <td>@Model.Student.Fname  @Model.Student.Lname</td>
+                                                    @if (string.IsNullOrWhiteSpace(Model.End_status))
+                                                    {
+                                                        <td>@Model.Status</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>@Model.End_status</td>
+                                                    }
+
+                                                    <td>@Model.Student.Faculty</td>
+                                                    <td>@Model.Student.Year @Model.Student.Course @Model.Student.Semester</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>@Model.Staff.Fname  @Model.Staff.Lname</td>
+                                                    <td>@Model.Staff.Designation</td>
+                                                    <td>@Model.Staff.Email</td>
+                                                    <td>@Model.Staff.Phone_No</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>
+                                                @{
+                                                    if (ViewBag.currentuser == "staff" && string.IsNullOrWhiteSpace(Model.End_status))
+                                                    {
+                                                        <div class="primary-button btn">
+                                                            @Html.ActionLink("End Session", "End_Session", new { id = Model.Session_ID }, new { onclick = "return confirm('This will end the current counseling session with the student, student status will be set to recovered and session end date will be inserted, are you sure want to continue?');", @class = "btn-danger" })
+                                                            @Html.ActionLink("Manage Recommended Activity", "List_Selected_Activites", new { id = Model.Session_ID })
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="primary-button">
+                                                            @Html.ActionLink("View Recommended Activity", "List_Selected_Activites", new { id = Model.Session_ID })
+                                                        </div>
+                                                    }
+
+                                                    if (!string.IsNullOrWhiteSpace(Model.End_status))
+                                                    {
+                                                        <a>Session end at @Model.Date_End</a>
+                                                    }
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                                @if (ViewBag.currentuser == "staff")
+                                {
+                                    <label>Student Current Condition :</label>
+                                }
+                                else
+                                {
+                                    <label>Your Current Condition :</label>
+                                }
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="@ViewBag.currentLevel" aria-valuemin="0" aria-valuemax="100" style="width: @ViewBag.currentLevel%">@ViewBag.currentLevel % @ViewBag.levelName</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+
+@{
+    if (ViewBag.currentuser == "staff")
+    {
+        <section class="services">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4" style="cursor: pointer;">
+                        <a href="@Url.Action("Chat", "Home", new { id = Model.Session_ID })">
+                            <div class="service-item first-item">
+                                <div class="icon"></div>
+                                <h4>Chat</h4>
+                                <p>Get contact and chat with student using this platform.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4" style="cursor: pointer;">
+                        <a href="@Url.Action("LogBook", "Student", new { id = Model.Session_ID , currentUser = ViewBag.currentuser})">
+                            <div class="service-item second-item">
+                                <div class="icon"></div>
+                                <h4>Log Book</h4>
+                                <p>Display student personal daily log book rountine.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4" style="cursor: pointer;">
+                        <a href="@Url.Action("List_Meeting_Record", "Activity", new { id = Model.Session_ID })">
+                            <div class="service-item third-item">
+                                <div class="icon"></div>
+                                <h4>Meeting Record</h4>
+                                <p>Create or record new meeting record with the student</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    else
+    {
+        <section class="services">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4" style="cursor: pointer;">
+                        <a href="@Url.Action("Chat", "Home", new { id = Model.Session_ID })">
+                            <div class="service-item first-item">
+                                <div class="icon"></div>
+                                <h4>Chat</h4>
+                                <p>Get contact with counselor using this platform.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4" style="cursor: pointer;">
+                        <a href="@Url.Action("LogBook", "Student", new { id = Model.Session_ID , currentUser = ViewBag.currentuser})">
+                            <div class="service-item second-item">
+                                <div class="icon"></div>
+                                <h4>Log Book</h4>
+                                <p>Display your personal daily log book rountine.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4" style="cursor: pointer;">
+                        <a href="@Url.Action("DassForm", "FarzanaDass", new { studentid = Model.Student_ID , fromSess = "true"})">
+                            <div class="service-item third-item">
+                                <div class="icon"></div>
+                                <h4>Dass Form</h4>
+                                <p>Re-do Dass Form to update condition.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+}

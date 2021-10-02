@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Activity_Report";
+}
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+    theme: "light1", // "light1", "light2", "dark1", "dark2"
+    exportEnabled: true,
+	title:{
+		text: "Total Student Joined Base on Activity"
+	},
+	axisY: {
+		title: "Total Student"
+	},
+	axisX: {
+		title: "Activity Name"
+	},
+	data: [{
+        type: "column",
+		showInLegend: true,
+		legendMarkerColor: "grey",
+		legendText: "",
+        dataPoints: @Html.Raw(ViewBag.graph)
+	}]
+});
+
+var chart2 = new CanvasJS.Chart("chartMonth", {
+    animationEnabled: true,
+    exportEnabled: true,
+	theme: "light1", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "Total Student Joined Base on @Html.Raw(ViewBag.erMonth)"
+	},
+	axisY: {
+		title: "Total Student"
+	},
+	axisX: {
+		title: "@Html.Raw(ViewBag.erMonth)"
+	},
+	data: [{
+        type: "column",
+		showInLegend: true,
+		legendMarkerColor: "grey",
+		legendText: "",
+        dataPoints: @Html.Raw(ViewBag.graphMonth)
+	}]
+});
+chart.render();
+chart2.render();
+}
+</script>
+
+
+
+<h2>Activity Report</h2>
+<br />
+
+<button onclick="printDiv('printableArea')">Print Report</button>
+
+
+@using (Html.BeginForm("Activity_Report", "Activity", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <label for="faculty">Faculty</label>
+
+    <select name="faculty" id="faculty">
+        <option value="all">All</option>
+        @foreach (var item in ViewBag.Faculty)
+        {
+            <option value="@item.Faculty">@item.Faculty</option>
+        }
+    </select>
+
+    <label for="inSession">Session</label>
+
+    <select name="inSession" id="inSession">
+        <option value="all">All</option>
+        <option value="inSession">In Session</option>
+    </select>
+
+    <label for="condition">Condition</label>
+
+    <select name="condition" id="condition">
+        <option value="all">All</option>
+        <option value="normal">Normal</option>
+        <option value="depress">Depression</option>
+        <option value="anxiety">Anxiety</option>
+        <option value="stress">Stress</option>
+    </select>
+
+    <label for="attend">Attendance</label>
+    <select name="attend" id="attend">
+        <option value="all">All</option>
+        <option value="attend">Attend</option>
+        <option value="notAttend">Not Attend</option>
+    </select>
+
+    <label for="byDate">By </label>
+    <select name="byDate" id="byDate">
+        <option value="month">Month</option>
+        <option value="day">Day of Week</option>
+    </select>
+
+    <button type="submit">Filter</button>
+}
+
+<br />
+<br />
+
+
+
+<div id="chartContainer" style="height: 370px; width: 81%;"></div>
+<br />
+<br />
+
+<div id="chartMonth" style="height: 370px; width: 81%;"></div>
+
+<br />
+<br />
+
+
+<div id="printableArea">
+    <section>
+        <h3>Report Table</h3>
+        <div class="container-fluid primary-button">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="default-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Activity Name</th>
+                                    <th>Total Student</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.Data1)
+                                {
+                                    <tr>
+                                        <td>@item.acName</td>
+                                        <td>@item.Y</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="alternate-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>@ViewBag.erMonth</th>
+                                        <th>Total Student</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.Data2)
+                                    {
+                                        <tr>
+                                            <td>@item.acMonth</td>
+                                            <td>@item.Y</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+<script src="~/Scripts/js/canvasjs.js"></script>
+
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
+
+
+

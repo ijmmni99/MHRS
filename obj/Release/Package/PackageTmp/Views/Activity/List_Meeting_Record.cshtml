@@ -1,0 +1,91 @@
+﻿@model IEnumerable<MHRS.Models.Meeting_Record>
+
+@{
+    ViewBag.Title = "List_Meeting_Record";
+    @Html.Raw(TempData["msg"]);
+}
+
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>List Meeting Record</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+<div class="primary-button">
+    @Html.ActionLink("Create New", "Create_Meeting_Record")
+</div>
+
+<br /><br />
+<section>
+    <div class="container-fluid filled-rectangle-button">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="default-table">
+                    <table>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Topic)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Discussion)
+                            </th>
+                            <th>
+                                Meeting Date
+                            </th>
+                            <th>
+                                Mental Health Status
+                            </th>
+                            <th>
+                                Student Name
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Topic)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Discussion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Meet_Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Patient_Status)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Session.Student.DisplayName)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit_Meeting_Record", new { id = item.Meeting_ID })
+                                    
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "Display_Meeting_Record", new { id = item.Meeting_ID })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Delete", "Delete_Meeting_Record", new { id = item.Meeting_ID })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

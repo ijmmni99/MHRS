@@ -1,0 +1,64 @@
+﻿@model List<MHRS.Models.Activity>
+@{
+    ViewBag.Title = "Create_Recommended_Activity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Select Activity</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@foreach (var item in Model)
+{
+    <section class="left-image">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    @if (item.Activity_Image != null)
+                    {
+                        string imageBase64 = Convert.ToBase64String(item.Activity_Image);
+                        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                        <img src="@imageSrc" style="width: 70%" />
+                    }
+                    else
+                    {
+                        <img src="~/Scripts/images/images.png" />
+                    }
+                </div>
+                <div class="col-md-6">
+                    <div class="right-content">
+                        @if (!string.IsNullOrWhiteSpace(item.Activity_Status))
+                        {
+                            <h4>@item.Activity_Name || @item.Activity_Status</h4>
+                        }
+                        else
+                        {
+                            <h4>@item.Activity_Name</h4>
+                        }
+
+                        <p>@item.Descriptions</p>
+                        <p>Date : @item.Activity_Date</p>
+                        <br />
+                        <br />
+                        <p>Counselor</p>
+                        @foreach (var x in item.Activity_Staff)
+                        {
+                            <p>@x.DisplayName</p>
+                            <p>Contact : @x.Staff.Phone_No</p>
+                        }
+                        <div class="primary-button">
+                            @Html.ActionLink("Add Activity", "Add_Recommended_Activity", new { id = item.Activity_ID })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

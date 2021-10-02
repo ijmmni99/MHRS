@@ -1,0 +1,173 @@
+﻿@model IEnumerable<MHRS.Models.DassForm>
+@{
+    ViewBag.Title = "dassResult";
+    Layout = "~/Views/Shared/_LayoutHusna.cshtml";
+}
+
+
+
+<script src="~/Scripts/chart/exporting.js"></script>
+<script src="~/Scripts/chart/highcharts.js"></script>
+
+<div style="margin-right">
+    @Html.ActionLink("Monthly result", "datapoint")
+
+</div>
+
+<h1>
+    <center>
+        Depression Anxiety Stress Scales (DASS) - Student Result
+    </center>
+</h1>
+
+<div class="jumbotron">
+    <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+</div>
+
+
+
+<script>
+    //get json data
+    $(document).ready(function () {
+        $.getJSON("/HusnaAdmin/GetDataDASS", function (data) {
+
+            Highcharts.chart('container',
+                {
+                    chart:
+                    {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title:
+                    {
+                        text: 'Condition'
+                    },
+                    tooltip:
+                    {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b> <br>Students: {point.y}'
+                    },
+                    accessibility:
+                    {
+                        point:
+                        {
+                            valueSuffix: '%'
+                        }
+                    },
+                    plotOptions:
+                    {
+                        pie:
+                        {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels:
+                            {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                            }
+                        }
+                    },
+                    series:
+                        [{
+                            name: 'Students',
+                            colorByPoint: true,
+                            data:
+                                [{
+                                    name: 'Normal',
+                                    y: data.Normal
+                                }, {
+                                    name: 'Stress',
+                                    y: data.Stress
+                                },
+                                {
+                                    name: 'Anxiety',
+                                    y: data.Anxiety
+                                },
+                                {
+                                    name: 'Depression',
+                                    y: data.Depression
+                                }]
+                        }]
+                });
+        });
+    });
+
+</script>
+
+@*search by condition*@
+@using (Html.BeginForm("dassResult", "HusnaAdmin", FormMethod.Get))
+{
+    <text>Condition:</text>
+    <br />
+
+    <select name="search" id="search">
+        <option>All</option>
+        <option>Normal</option>
+        <option>Depression</option>
+        <option>Anxiety</option>
+        <option>Stress</option>
+    </select>
+
+    <button type="submit">Filter</button>
+}
+<br />
+<br />
+<br />
+
+<div id="printableArea">
+    <table>
+        <button onclick="printDiv('printableArea')">Print Report</button>
+        <br />
+        <br />
+        <tr>
+            <th>
+                Student ID
+            </th>
+            <th>
+                Student Name
+            </th>
+            <th>
+                Condition
+            </th>
+            <th>
+                Date
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.Fname) @Html.DisplayFor(modelItem => item.Student.Lname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Condition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<script src="~/Scripts/js/canvasjs.js"></script>
+
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>

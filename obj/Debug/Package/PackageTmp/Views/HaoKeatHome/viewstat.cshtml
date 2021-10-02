@@ -1,0 +1,27 @@
+﻿@model MHRS.Models.Session
+@{
+    ViewBag.Title = "Stat";
+    Layout = "~/Views/stafflayout.cshtml";
+}
+
+<h2>Statistics For Student Status</h2>
+@using (Html.BeginForm("viewstat", "Home", FormMethod.Get))
+{
+    @Html.DropDownListFor(Model => Model.Date_Start, new List<SelectListItem>
+        {new SelectListItem {Text = "JANUARY", Value="01/01/2021"  },
+        new SelectListItem {Text = "FEBRUARY", Value="02/01/2021"  },
+        new SelectListItem {Text = "MARCH", Value="03/01/2021"  },
+        new SelectListItem {Text = "APRIL", Value="04/01/2021"  },
+        new SelectListItem {Text = "MAY", Value="05/01/2021"  },
+        new SelectListItem {Text = "JUNE", Value="06/01/2021"  },
+        new SelectListItem {Text = "JULY", Value="07/01/2021"  },
+        new SelectListItem {Text = "AUGUST", Value="08/01/2021"  },
+        new SelectListItem {Text = "SEPTEMBER", Value="09/01/2021"  },
+        new SelectListItem {Text = "OCTOBER", Value="10/01/2021"  },
+        new SelectListItem {Text = "NOVEMBER", Value="11/01/2021"  },
+         new SelectListItem {Text = "DECEMBER", Value="12/01/2021"  }
+        }, new { onchange = "this.form.submit()" })
+
+
+    <img src=@Url.Action("seechart1","HaoKeatHome",new { dt=Model.Date_Start}) />
+}

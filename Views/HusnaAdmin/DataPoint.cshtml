@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "DataPoint";
+    Layout = "~/Views/Shared/_LayoutHusna.cshtml";
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <h2>
+        @Html.ActionLink("<", "dassResult")
+    </h2>
+    <script>
+		window.onload = function ()
+		{
+			var chart = new CanvasJS.Chart("chartContainer",
+				{
+					animationEnabled: true,
+                    theme: "light1",
+					exportEnabled: true,
+					title:
+					{
+                        text: "Result Student Condition Based On DASS Form 2021"
+					},
+					data:
+						[{
+							type: "column",
+							dataPoints:  @Html.Raw(ViewBag.DataPoints)
+						}]
+				});
+			chart.render();
+		}
+    </script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
+    @using (Html.BeginForm("DataPoint", "HusnaAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <label for="month">Month</label>
+
+        <select name="month" id="month">
+            <option value="">All</option>
+            <option value="January">January</option>
+            <option value="Febuary">Febuary</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="Jun">Jun</option>
+            <option value="July">July</option>
+            <option value="Ogos">Ogos</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+
+        <button type="submit">Filter</button>
+    }
+
+    <table>
+        <tr>
+            <th>
+                Condition
+            </th>
+            <th>
+                Total Student
+            </th>
+        </tr>
+
+        @foreach (var item in ViewBag.DataPoint)
+        {
+            <tr>
+                <td>
+                    @item.Label
+                </td>
+                <td>
+                    @item.Y
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
+

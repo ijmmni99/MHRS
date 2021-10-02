@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MHRS.Models.Meeting_Record>
+
+@{
+    ViewBag.Title = "List_Meeting_Record";
+    @Html.Raw(TempData["msg"]);
+}
+
+<h2>List Meeting Record</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create_Meeting_Record")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Topic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discussion)
+        </th>
+        <th>
+            Meeting Date
+        </th>
+        <th>
+            Mental Health Status
+        </th>
+        <th>
+            Student Name
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discussion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Meet_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient_Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Session.Student.DisplayName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit_Meeting_Record", new { id = item.Meeting_ID }) |
+                @Html.ActionLink("Details", "Display_Meeting_Record", new { id = item.Meeting_ID }) |
+                @Html.ActionLink("Delete", "Delete_Meeting_Record", new { id = item.Meeting_ID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,99 @@
+﻿@model MHRS.Models.Activity
+
+@{
+    ViewBag.Title = "CreateActivity";
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="~/Content/themes/base/jquery-ui.css">
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+@using (Html.BeginForm("CreateActivity", "Activity", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <section class="forms">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Create Activity</h2>
+                    </div>
+                    <form id="contact" action="" method="post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <fieldset>
+                                    <label for="demo-priority-medium">Activity Name </label>
+                                    @Html.EditorFor(model => model.Activity_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter activity name here.." } })
+                                    @Html.ValidationMessageFor(model => model.Activity_Name, "", new { @class = "text-danger" })
+                                </fieldset>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <fieldset>
+                                    <label for="demo-priority-medium">Description </label>
+                                    @Html.TextAreaFor(x => x.Descriptions, new { @class = "form-control", rows = "3", @placeholder = "Enter Description.." })
+                                    @Html.ValidationMessageFor(model => model.Descriptions, "", new { @class = "text-danger" })
+                                </fieldset>
+                            </div>
+
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <label for="demo-priority-medium">Date </label>
+                                    @Html.EditorFor(model => model.AcDate, new { htmlAttributes = new { @class = "form-control" } })
+                                </fieldset>
+                            </div>
+
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <label for="demo-priority-medium">Time </label>
+                                    @Html.EditorFor(model => model.AcTime, new { htmlAttributes = new { @class = "form-control" } })
+                                </fieldset>
+                            </div>
+
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <label for="demo-priority-medium"> Upload Image/Poster </label>
+                                    <input type="file" name="postedFile" onchange="readURL(this);" />
+                                    <img id="blah" src="#" alt="your image" />
+                                </fieldset>
+                            </div>
+
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <img id="blah" src="#" alt="your image" />
+                                </fieldset>
+                            </div>
+
+
+
+                            <div class="primary-button col-md-12">
+                                @Html.ActionLink("Back to List", "Activity", new { id = ViewBag.staffid }, new { @class = "button" })
+                                <button type="submit" id="form-submit" class="button">Next</button>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

@@ -1,0 +1,113 @@
+﻿@model MHRS.Models.TotalStaffStudent
+@{
+    Layout = "~/Views/Shared/_LayoutHusna.cshtml";
+}
+<script src="~/Scripts/chart/exporting.js"></script>
+<script src="~/Scripts/chart/highcharts.js"></script>
+
+<section class="content-header">
+
+    <ol class="breadcrumb">
+        <h1>
+            ADMIN HOMEPAGE
+        </h1>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <p><h2>Total Staffs: </h2></p>
+                    <h1>@Model.staff_count</h1>
+
+                </div>
+                <b>
+                    @Html.ActionLink("More Staff Info >", "IndexStaffAdmin")
+
+                </b>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <p><h2>Total Students: </h2></p>
+                    <h1>@Model.student_count</h1>
+                </div>
+                <b>
+                    @Html.ActionLink("More Student Info >", "IndexStudentAdmin")
+                </b>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<br />
+<br />
+<br />
+<h3>
+    <center>
+        STAFF ROLE RATIO
+    </center>
+</h3>
+
+<div class="jumbotron">
+    <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+</div>
+
+<script>
+    //get json data
+    $(document).ready(function () {
+        $.getJSON("/HusnaAdmin/GetDataStaff", function (data) {
+
+            Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Staff Ratio'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b> <br>Total: {point.y}'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Role',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Admin',
+                        y: data.Admin
+                    }, {
+                        name: 'Staff',
+                        y: data.Staff
+                    }]
+                }]
+            });
+        });
+    });
+
+</script>

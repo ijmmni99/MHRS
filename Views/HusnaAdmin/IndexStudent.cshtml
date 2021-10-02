@@ -1,0 +1,202 @@
+﻿@model IEnumerable<MHRS.Models.Student>
+@{
+    ViewBag.Title = "IndexStudent";
+    Layout = "~/Views/Shared/_LayoutHusna.cshtml";
+}
+
+<script src="~/Scripts/chart/exporting.js"></script>
+<script src="~/Scripts/chart/highcharts.js"></script>
+
+<h1>
+    <center>
+        ANALYSIS STUDENT
+    </center>
+</h1>
+
+<div class="jumbotron">
+    <div id="container" style="min-width: 100px; height: 400px; max-width: 800px; margin: 0 auto"></div>
+
+</div>
+
+<script>
+    //get json data
+    $(document).ready(function () {
+        $.getJSON("/HusnaAdmin/GetDataStudent", function (data) {
+
+            Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Faculty Ratio'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}% </b><br>Students: {point.y}'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} % '
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Students',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'FTMK',
+                        y: data.Ftmk
+                    }, {
+                        name: 'FKEKK',
+                        y: data.Fkekk
+                    }, {
+                        name: 'FKE',
+                        y: data.Fke
+                    }, {
+                        name: 'FKP',
+                        y: data.Fkp
+                    }, {
+                        name: 'FKM',
+                        y: data.Fkm
+                    }, {
+                        name: 'FPTT',
+                        y: data.Fptt
+                    }, {
+                        name: 'FTK',
+                        y: data.Ftk
+                    }, {
+                        name: 'FTKMP',
+                        y: data.Ftkmp
+                    }]
+                }]
+            });
+        });
+    });
+
+</script>
+
+
+@using (Html.BeginForm("IndexStudent", "HusnaAdmin", FormMethod.Get))
+{
+    <label> Faculty:</label>
+
+    <select name="search" id="search">
+        <option>All</option>
+        <option>FTMK</option>
+        <option>FKEKK</option>
+        <option>FKE</option>
+        <option>FKP</option>
+        <option>FKM</option>
+        <option>FPTT</option>
+        <option>FTK</option>
+        <option>FTKMP</option>
+    </select>
+
+    <button type="submit">Filter</button>
+}
+
+
+
+<br />
+<br />
+<div id="printableArea">
+    <button onclick="printDiv('printableArea')" style="padding-right">Print Student List</button>
+    <br />
+    <br />
+    <table class="table">
+        @Html.ActionLink("Student Report", "IndexStudent")
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Student_ID)
+            </th>
+            <th>
+                Student Name
+            <th>
+                @Html.DisplayNameFor(model => model.Faculty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Semester)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+            <th></th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3" style="color:red">
+                    No Match
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_ID).ToString().ToUpper()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fname).ToString().ToUpper() @Html.DisplayFor(modelItem => item.Lname).ToString().ToUpper()
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Faculty).ToString().ToUpper()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course).ToString().ToUpper()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Semester)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone_No)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email).ToString().ToUpper()
+                    </td>
+
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>

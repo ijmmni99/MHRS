@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8668499309b74b6d818805f7530dc496" Name="Diagram1">
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Activity" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Activity_Staff" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Activity_Student" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Chat" Width="1.5" PointX="10.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.DassForm" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.LogBook" Width="1.5" PointX="10.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Meeting_Record" Width="1.5" PointX="10.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Role" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Schedule" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Session" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Staff" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Student" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Activity___Activ__489AC854" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Activity___Activ__4C6B5938" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Activity___Staff__4B7734FF" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Activity___Stude__47A6A41B" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Chat__Session_ID__339FAB6E" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK_DassForm_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__LogBook__Session__367C1819" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Meeting_R__Sessi__395884C4" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Staff__Role_ID__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Student__Role_ID__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Schedule__Studen__3C34F16F" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Session__Staff_I__30C33EC3" ManuallyRouted="false" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Session__Student__2FCF1A8A" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PKPMentalHealthRecoveryModel.Question_DassForm" Width="1.5" PointX="7.5" PointY="14.75" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Question___Form___65370702" />
+        <AssociationConnector Association="PKPMentalHealthRecoveryModel.FK__Question___Stude__662B2B3B" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

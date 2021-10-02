@@ -1,0 +1,75 @@
+﻿@model MHRS.Models.DassForm
+@{
+    ViewBag.Title = "DetailsDass";
+    Layout = "~/Views/Shared/_LayoutHusna.cshtml";
+}
+
+
+
+<div>
+    <h4>DassForm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Form_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Form_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result_Stress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result_Stress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result_Anxiety)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result_Anxiety)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result_Depression)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result_Depression)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Condition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Condition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "DASSresult")
+</p>
+
+

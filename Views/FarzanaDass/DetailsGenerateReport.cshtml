@@ -1,0 +1,148 @@
+﻿@model MHRS.Models.Question_DassForm
+
+@{
+    ViewBag.Title = "Details Values";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        p {
+            color: black;
+        }
+
+        th {
+            background-color: lightblue;
+            Color: black;
+            text-align: center;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding-bottom: 10px;
+            padding: 15px;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+    </style>
+</head>
+
+
+
+
+    <label>Submitted at @Model.DassForm.Date resulting @Model.DassForm.Condition condition.</label><br />
+    <table>
+        <tr>
+            <th>Student Name:  @Model.Student.Fname @Model.Student.Lname</th>
+            <td>Matric Number : @Model.Student.Student_ID</td>
+        </tr>
+
+        <tr>
+            <th>1. I found it hard to wind down</th>
+            <td>@Model.Q1_Value</td>
+        </tr>
+        <tr>
+            <th>2. I was aware of dryness of my mouth</th>
+            <td>@Model.Q2_Value</td>
+        </tr>
+        <tr>
+            <th>3. I couldn't seem to experience any positive feeling at all</th>
+            <td>@Model.Q3_Value</td>
+        </tr>
+        <tr>
+            <th>
+                4.  I experienced breathing difficulty
+                (eg, excessively rapid breathing, breathlessness in the absence of physical exertion)
+            </th>
+            <td>@Model.Q4_Value</td>
+        </tr>
+        <tr>
+            <th>5. I found it difficult to work up the initiative to do things</th>
+            <td>@Model.Q5_Value</td>
+        </tr>
+        <tr>
+            <th>6. I tended to over-react to situations</th>
+            <td>@Model.Q6_Value</td>
+        </tr>
+        <tr>
+            <th>7. I experienced trembling (eg, in the hands)</th>
+            <td>@Model.Q7_Value</td>
+        </tr>
+        <tr>
+            <th>8. I felt that I was using a lot of nervous energy</th>
+            <td>@Model.Q8_Value</td>
+        </tr>
+        <tr>
+            <th>9. I was worried about situations in which I might panic and make a fool of myself</th>
+            <td>@Model.Q9_Value</td>
+        </tr>
+        <tr>
+            <th>10. I felt that I had nothing to look forward to</th>
+            <td>@Model.Q10_Value</td>
+        </tr>
+        <tr>
+            <th>11. I found myself getting agitated</th>
+            <td>@Model.Q11_Value</td>
+        </tr>
+        <tr>
+            <th>12. I found it difficult to relax</th>
+            <td>@Model.Q12_Value</td>
+        </tr>
+        <tr>
+            <th>13. I felt down-hearted and blue</th>
+            <td>@Model.Q13_Value</td>
+        </tr>
+        <tr>
+            <th>14. I was intolerant of anything that kept me from getting on with what I was doing</th>
+            <td>@Model.Q14_Value</td>
+        </tr>
+        <tr>
+            <th>15. I felt I was close to panic</th>
+            <td>@Model.Q15_Value</td>
+        </tr>
+        <tr>
+            <th>16. I was unable to become enthusiastic about anything</th>
+            <td>@Model.Q16_Value</td>
+        </tr>
+        <tr>
+            <th>17. I felt I wasn't worth much as a person</th>
+            <td>@Model.Q17_Value</td>
+        </tr>
+        <tr>
+            <th>18. I felt that I was rather touchy</th>
+            <td>@Model.Q18_Value</td>
+        </tr>
+        <tr>
+            <th>
+                19. I was aware of the action of my heart in the absence of physical exertion
+                (eg, sense of heart rate increase, heart missing a beat)
+            </th>
+            <td>@Model.Q19_Value</td>
+        </tr>
+        <tr>
+            <th>20. I felt scared without any good reason</th>
+            <td>@Model.Q20_Value</td>
+        </tr>
+        <tr>
+            <th>21. I felt that life was meaningless</th>
+            <td>@Model.Q21_Value</td>
+        </tr>
+
+    </table>
+
+
+<p>
+    @Html.ActionLink("Back to List", "GenerateReport", new { id = Session["staffid"].ToString() })
+</p>

@@ -1,0 +1,69 @@
+﻿@model MHRS.Models.Meeting_Record
+
+@{
+    ViewBag.Title = "Display_Meeting_Record";
+}
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Display Meeting Record</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br /> 
+
+<div>
+    <h4>Meeting Record</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Topic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Topic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discussion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discussion)
+        </dd>
+
+        <dt>
+            Meeting Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meet_Date)
+        </dd>
+
+        <dt>
+            Patient Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Status)
+        </dd>
+
+        <dt>
+            Student Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Session.Student.DisplayName)
+        </dd>
+
+    </dl>
+</div>
+<br />
+<div class="primary-button">
+    @Html.ActionLink("Edit", "Edit_Meeting_Record", new { id = Model.Meeting_ID }) |
+    @Html.ActionLink("Back to List", "List_Meeting_Record")
+</div>
+

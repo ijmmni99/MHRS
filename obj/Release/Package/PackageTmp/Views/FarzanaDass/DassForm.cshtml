@@ -1,0 +1,240 @@
+﻿@{ Layout = "~/Views/Shared/_LayoutForm.cshtml"; }
+
+@{
+    ViewBag.Title = "Welcome To The Dexpression, Anxiety & Stress (DASS) Form";
+}
+<h1>@ViewBag.Title.</h1>
+<h3>@ViewBag.Message</h3>
+<br />
+
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        p {
+            color: black;
+        }
+
+        th {
+            background-color: lightblue;
+            Color: black;
+            text-align: center;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding-bottom: 10px;
+            padding: 15px;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        Please read each statement and select a number 0, 1, 2 or 3 that indicates how much the statement applied to you over the past week.
+        There are no right or wrong answers.
+        Do not spend too much time on any statement.
+    </p>
+
+    <br />
+    <h6> <b> The rating scale is as follows : </b> </h6>
+    <h6> <b> 0 Did not apply to me at all </b> </h6>
+    <h6> <b> 1 Applied to me to some degree, or some of the time </b> </h6>
+    <h6> <b> 2 Applied to me to a considerable degree, or a good part of time </b> </h6>
+    <h6> <b> 3 Applied to me very much, or most of the time </b> </h6>
+    <br />
+</body>
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<form action="DassForm" method="post">
+    <table>
+        <tr>
+            <th>  </th>
+            <th> 0 </th>
+            <th> 1 </th>
+            <th> 2 </th>
+            <th> 3 </th>
+        </tr>
+
+        <tr>
+            <td> I found it hard to wind down  </td>
+            <td> <input type="radio" id="0" name="rate1" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate1" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate1" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate1" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I was aware of dryness of my mouth </td>
+            <td> <input type="radio" id="0" name="rate2" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate2" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate2" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate2" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I couldn't seem to experience any positive feeling at all </td>
+            <td> <input type="radio" id="0" name="rate3" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate3" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate3" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate3" value="3"> </td>
+        </tr>
+        <tr>
+            <td>
+                I experienced breathing difficulty
+                (eg, excessively rapid breathing, breathlessness in the absence of physical exertion)
+            </td>
+            <td> <input type="radio" id="0" name="rate4" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate4" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate4" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate4" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I found it difficult to work up the initiative to do things </td>
+            <td> <input type="radio" id="0" name="rate5" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate5" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate5" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate5" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I tended to over-react to situations </td>
+            <td> <input type="radio" id="0" name="rate6" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate6" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate6" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate6" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I experienced trembling (eg, in the hands) </td>
+            <td> <input type="radio" id="0" name="rate7" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate7" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate7" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate7" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I felt that I was using a lot of nervous energy </td>
+            <td> <input type="radio" id="0" name="rate8" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate8" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate8" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate8" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I was worried about situations in which I might panic and make a fool of myself </td>
+            <td> <input type="radio" id="0" name="rate9" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate9" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate9" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate9" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I felt that I had nothing to look forward to </td>
+            <td> <input type="radio" id="0" name="rate10" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate10" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate10" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate10" value="3"> </td>
+        </tr>
+
+        <tr>
+            <td> I found myself getting agitated </td>
+            <td> <input type="radio" id="0" name="rate11" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate11" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate11" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate11" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I found it difficult to relax </td>
+            <td> <input type="radio" id="0" name="rate12" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate12" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate12" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate12" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I felt down-hearted and blue </td>
+            <td> <input type="radio" id="0" name="rate13" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate13" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate13" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate13" value="3"> </td>
+        </tr>
+        <tr>
+            <td>
+                I was intolerant of anything that kept me from getting on with what I was doing
+            </td>
+            <td> <input type="radio" id="0" name="rate14" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate14" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate14" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate14" value="3"> </td>
+        </tr>
+        <tr>
+            <td>  I felt I was close to panic </td>
+            <td> <input type="radio" id="0" name="rate15" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate15" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate15" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate15" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I was unable to become enthusiastic about anything </td>
+            <td> <input type="radio" id="0" name="rate16" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate16" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate16" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate16" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I felt I wasn't worth much as a person </td>
+            <td> <input type="radio" id="0" name="rate17" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate17" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate17" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate17" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I felt that I was rather touchy </td>
+            <td> <input type="radio" id="0" name="rate18" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate18" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate18" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate18" value="3"> </td>
+        </tr>
+        <tr>
+            <td>
+                I was aware of the action of my heart in the absence of physical exertion
+                (eg, sense of heart rate increase, heart missing a beat)
+            </td>
+            <td> <input type="radio" id="0" name="rate19" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate19" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate19" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate19" value="3"> </td>
+        </tr>
+        <tr>
+            <td> I felt scared without any good reason </td>
+            <td> <input type="radio" id="0" name="rate20" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate20" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate20" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate20" value="3"> </td>
+        </tr>
+
+        <tr>
+            <td> I felt that life was meaningless </td>
+            <td> <input type="radio" id="0" name="rate21" value="0"> </td>
+            <td> <input type="radio" id="1" name="rate21" value="1"> </td>
+            <td> <input type="radio" id="2" name="rate21" value="2"> </td>
+            <td> <input type="radio" id="3" name="rate21" value="3"> </td>
+        </tr>
+
+    </table>
+</form>
+
+<br />
+
+<button id="btnSaveSec1" class="btn btn-primary"> Submit </button>
+<button id="btnReset" class="btn btn-primary"> Reset </button>
+<br />
+
+
+<script src="~/Scripts/DassForm.js"></script>
+<script type="text/javascript" src="~/Scripts/test.js"></script>
+
+
+

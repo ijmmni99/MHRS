@@ -1,0 +1,118 @@
+﻿@model IEnumerable<MHRS.Models.Session>
+
+@{
+    ViewBag.Title = "List_Sessions";
+    @Html.Raw(TempData["msg"]);
+}
+
+<h2>List Counseling Sessions</h2>
+<br />
+<div class="primary-button">
+    @Html.ActionLink("List Requested Session", "List_Requested")
+</div>
+<br />
+<br />
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>Current Sessions - @Model.Where(x => x.End_status != "Recovered").Count()</h2>
+                </div>
+                <div class="default-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Condition</th>
+                                <th>Faculty</th>
+                                <th>Phone Number</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (item.End_status != "Recovered")
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.DisplayName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.Faculty)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.Phone_No)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Select", "Sessions", new { id = item.Session_ID })
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br />
+<br />
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>Past Sessions - @Model.Where(x => x.End_status == "Recovered").Count()</h2>
+                </div>
+                <div class="default-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Condition</th>
+                                <th>Faculty</th>
+                                <th>Phone Number</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (item.End_status == "Recovered")
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.DisplayName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.Faculty)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.Phone_No)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Select", "Sessions", new { id = item.Session_ID })
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,47 @@
+﻿@model List<MHRS.Models.DassForm>
+@{
+    ViewBag.Title = "List_Requested";
+}
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>List Requested Student - @Model.Count</h2>
+                </div>
+                <div class="default-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Faculty</th>
+                                <th>Contact Number</th>
+                                <th>Condition</th>
+                                <th>Date Requested</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Student.Fname  @item.Student.Lname</td>
+                                    <td>@item.Student.Faculty</td>
+                                    <td>@item.Student.Phone_No</td>
+                                    <td>@item.Condition</td>
+                                    <td>@item.Date</td>
+                                    <td>@Html.ActionLink("Select", "Create_Session", new { id = item.Student_ID })</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

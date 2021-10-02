@@ -1,0 +1,109 @@
+﻿@model IEnumerable<MHRS.Models.Activity>
+
+@{
+    ViewBag.Title = "List_Activity";
+    @Html.Raw(TempData["msg"]);
+    int i = 0;
+}
+
+
+
+<section class="main-banner">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="banner-contentt">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="banner-caption">
+                                <h1>Activity</h1>
+                                <h3 style="color:lightslategrey">List of activities from Unit Bimbingan Kaunseling</h3><br />
+                                <div class="primary-button">
+                                    @Html.ActionLink("Joined Activity", "List_Joined_Activity", new { id = Session["studentid"].ToString() })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@foreach (var item in Model)
+{
+    i++;
+    if (i % 2 != 0)
+    {
+    <!-- Left Image -->
+    <section class="left-image">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    @if (item.Activity_Image != null)
+                    {
+                        string imageBase64 = Convert.ToBase64String(item.Activity_Image);
+                        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                        <img src="@imageSrc" style="width: 70%" />
+                    }
+                    else
+                    {
+                        <img src="~/Scripts/images/images.png" />
+                    }
+                </div>
+                <div class="col-md-6">
+                    <div class="right-content">
+                        <h4>@item.Activity_Name</h4>
+                        <p>@item.Descriptions</p>
+                        <p>Date : @item.Activity_Date</p>
+                        <br />
+                        <br />
+                        <p>Counselor</p>
+                        @foreach (var x in item.Activity_Staff)
+                        {
+                            <p>@x.DisplayName</p>
+                            <p>Contact : @x.Staff.Phone_No</p>
+                        }
+                        <div class="primary-button">
+                            @Html.ActionLink("Request to join", "Join_Activity", new { id = item.Activity_ID }, new { @class = "btn", onclick = "return confirm('Are you sure?');" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    }
+    else
+    {
+    <!-- Right Image -->
+    <section class="right-image">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="left-content">
+                        <h4>@item.Activity_Name</h4>
+                        <p>@item.Descriptions</p>
+                        <p>@item.Activity_Date</p>
+                        <div class="primary-button">
+                            @Html.ActionLink("Request to join", "Join_Activity", new { id = item.Activity_ID }, new { @class = "btn", onclick = "return confirm('Are you sure?');" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @if (item.Activity_Image != null)
+                    {
+                        string imageBase64 = Convert.ToBase64String(item.Activity_Image);
+                        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                        <img src="@imageSrc" />
+                    }
+                    else
+                    {
+                        <img src="~/Scripts/images/images.png" />
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    }
+}

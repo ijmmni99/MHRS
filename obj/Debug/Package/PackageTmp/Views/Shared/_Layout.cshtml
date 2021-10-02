@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Scripts/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="~/Scripts/css/fontawesome.css">
+    <link rel="stylesheet" href="~/Scripts/css/style.css">
+    <link rel="stylesheet" href="~/Scripts/css/owl.css">
+</head>
+<body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Header -->
+                <header id="header">
+                    <div class="logo">
+                        @if (!string.IsNullOrEmpty(Session["studentid"] as string))
+                        {
+                            <a href="@Url.Action("studenthomepage", "HaoKeatHome",new { id = Session["studentid"].ToString() })">Mental Health Recovery</a>
+                        }
+                        
+
+                        @if(!string.IsNullOrEmpty(Session["staffid"] as string))
+                        {
+
+                            <a href="@Url.Action("staffhomepage", "HaoKeatHome",new { id = Session["staffid"].ToString() })">Mental Health Recovery</a>
+                        }
+
+                    </div>
+                </header>
+
+                <!-- Banner -->
+                @RenderBody()
+
+                <!-- Services -->
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar">
+
+            <div class="inner">
+                <!-- Menu -->
+                <nav id="menu">
+                    <ul>
+                        <li style="color:white">Navigation</li>
+                        <li></li>
+                        @if (!string.IsNullOrEmpty(Session["studentid"] as string))
+                        {
+                            <li>@Html.ActionLink("Student Dashboard", "studenthomepage", "HaoKeatHome", new { id = Session["studentid"].ToString() }, null)</li>
+
+                            if (ViewBag.Title == "LogBook")
+                            {
+                                <li>@Html.ActionLink("Session Dashboard", "Sessions", "Home", new { studentid = Session["studentid"].ToString() }, null)</li>
+                            }
+
+                            if (ViewBag.Title == "Chat")
+                            {
+                                <li>@Html.ActionLink("Session Dashboard", "Sessions", "Home", new { studentid = Session["studentid"].ToString() }, null)</li>
+                            }
+
+                            if (ViewBag.Title == "List_Joined_Activity")
+                            {
+                                <li>@Html.ActionLink("All Activity", "List_Activity", "Student", new { studentid = Session["studentid"].ToString() }, null)</li>
+                            }
+
+
+                        }
+
+                        @if (!string.IsNullOrEmpty(Session["staffid"] as string))
+                        {
+                            <li>@Html.ActionLink("Staff Dashboard", "staffhomepage", "HaoKeatHome", new { id = Session["staffid"].ToString() }, null)</li>
+
+                            if (ViewBag.Title == "LogBook")
+                            {
+                                <li>@Html.ActionLink("Session Dashboard", "Sessions", "Home", new { id = Session["session"].ToString() }, null)</li>
+                            }
+
+                            if (ViewBag.Title == "Chat")
+                            {
+                                <li>@Html.ActionLink("Session Dashboard", "Sessions", "Home", new { id = Session["session"].ToString() }, null)</li>
+                            }
+
+                            if (ViewBag.Title == "List_Meeting_Record")
+                            {
+                                <li>@Html.ActionLink("Session Dashboard", "Sessions", "Home", new { id = Session["session"].ToString() }, null)</li>
+                            }
+
+                            if (ViewBag.Title == "CreateActivity")
+                            {
+                                <li>@Html.ActionLink("All Activity", "Activity", "Activity", new { id = Session["staffid"].ToString() }, null)</li>
+                            }
+
+                            if (ViewBag.Title == "Attendance")
+                            {
+                                <li>@Html.ActionLink("All Activity", "Activity", "Activity", new { id = Session["staffid"].ToString() }, null)</li>
+                            }
+
+                            if (ViewBag.Title == "Activity_Report")
+                            {
+                                <li>@Html.ActionLink("All Activity", "Activity", "Activity", new { id = Session["staffid"].ToString() }, null)</li>
+                            }
+
+                            if (ViewBag.Title == "Edit_Activity")
+                            {
+                                <li>@Html.ActionLink("All Activity", "Activity", "Activity", new { id = Session["staffid"].ToString() }, null)</li>
+                            }
+
+                            if (ViewBag.Title == "Details Values")
+                            {
+                                <li>@Html.ActionLink("Dass Pie Chart", "GenerateReport", "FarzanaDass", new { id = Session["staffid"].ToString() }, null)</li>
+                            }
+                        }
+                    </ul>
+                </nav>
+
+                <!-- Search Box -->
+                
+                <!-- Start Footer  -->
+
+            </div>
+        </div>
+
+    </div>
+    <!-- End Footer  -->
+    <!-- End copyright  -->
+    <!-- ALL JS FILES -->
+    <script src="~/Scripts/js/jquery.min.js"></script>
+    <script src="~/Scripts/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Scripts/js/browser.min.js"></script>
+    <script src="~/Scripts/js/breakpoints.min.js"></script>
+    <script src="~/Scripts/js/transition.js"></script>
+    <script src="~/Scripts/js/owl-carousel.js"></script>
+    <script src="~/Scripts/js/custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿@model MHRS.Models.Staff
+
+@{
+    ViewBag.Title = "Add_Activity_Staff";
+    @Html.Raw(TempData["msg"]);
+}
+
+<h2>Add Staff</h2>
+<br />
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Staff Name</label>
+            <div class="col-md-12">
+                <div class="col-md-8 float-left">
+                    @Html.DropDownList("Staff_ID", new SelectList((System.Collections.IEnumerable)ViewData["Staffs"], "Staff_ID", "DisplayName"), htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-md-4 float-left primary-button">
+                    <button type="submit" >Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="primary-button" style="margin-top:10%">
+    @Html.ActionLink("Back to List", "List_Activity_Staff", null, new { @class = "btn btn-default" })
+</div>

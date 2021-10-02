@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MHRS.Models.Session>
+@{
+    ViewBag.Title = "List Stat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Student Status </h2>
+
+
+@using (Html.BeginForm("viewlist", "HaoKeatHome", FormMethod.Get))
+{
+    @Html.Hidden("id", 0)
+
+    @Html.DropDownList("Status", new List<SelectListItem>
+                  {new SelectListItem {Text = "Anxiety", Value="Anxiety"  },
+                   new SelectListItem {Text = "Depression", Value="Depression"  },
+                   new SelectListItem {Text = "Stress", Value="Stress"  },
+                  }, new { onchange = "this.form.submit()" })
+}
+
+
+<table class="table" id="printarea">
+    <tr>
+
+        <th>
+            Student_Matric
+        </th>
+        <th>
+            Student Name
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Counselling By
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Student_ID)
+            </td>
+            <td>
+                @item.Student.Fname.ToUpper()   @item.Student.Lname.ToUpper()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @item.Staff.Fname.ToUpper()   @item.Staff.Lname.ToUpper()
+            </td>
+
+
+        </tr>
+    }
+
+</table>

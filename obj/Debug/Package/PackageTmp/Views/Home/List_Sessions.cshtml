@@ -1,0 +1,104 @@
+﻿@model IEnumerable<MHRS.Models.Session>
+
+@{
+    ViewBag.Title = "List_Sessions";
+}
+
+<h2>List Counseling Sessions</h2>
+<br />
+<div class="primary-button">
+    @Html.ActionLink("List Requested Session", "List_Requested")
+</div>
+<br />
+
+
+<h3>Current Sessions</h3>
+<table class="table">
+    <tr>
+        <th>
+            Student Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.Faculty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.End_status != "Recovered")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.Faculty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.Phone_No)
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Sessions", new { id = item.Session_ID })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+
+<br /><br />
+<h3>Past Session</h3>
+<table class="table">
+    <tr>
+        <th>
+            Student Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.Faculty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.End_status == "Recovered")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.Faculty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.Phone_No)
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Sessions", new { id = item.Session_ID })
+                </td>
+            </tr>
+        }
+
+    }
+
+</table>

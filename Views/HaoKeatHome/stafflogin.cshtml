@@ -1,0 +1,42 @@
+﻿@model MHRS.Models.Staff
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutHaoKeat.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>STAFF LOGIN</h1>
+    <p class="lead">Admin and staff log in here for system management.</p>
+
+</div>
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <section class="col-md-5">
+            <form action="/HaoKeatHome/stafflogin" method="post" class="col-md-4">
+
+                <h2>Login</h2>
+                <p>Email<br>@Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email", @type = "Username", style = "width:500px" })</p>
+
+                <p>
+                    Password<br>@Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", @type = "Password", style = "width:500px" })
+                    <br />
+                    <button type="submit">Login</button>
+                </p>
+                @Html.Raw(TempData["msg"])
+            </form>
+            @Html.ActionLink("New User?", "staffregister")
+        </section>
+        <section class="col-md-7">
+
+            <p>
+                <img src="~/Scripts/images/staff.jpeg" width="200" height="400" />
+            </p>
+
+        </section>
+    }
+</div>
+
+

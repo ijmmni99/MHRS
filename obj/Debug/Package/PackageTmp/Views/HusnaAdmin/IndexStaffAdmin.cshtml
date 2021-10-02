@@ -1,0 +1,124 @@
+﻿@model IPagedList<MHRS.Models.Staff>
+@{
+    Layout = "~/Views/Shared/_LayoutHusna.cshtml";
+}
+
+@using PagedList;
+@using PagedList.Mvc;
+
+<h1>@Html.ActionLink("STAFF MANAGEMENT", "IndexStaffAdmin")</h1>
+
+
+
+<br />
+<br />
+@using (Html.BeginForm("IndexStaffAdmin", "HusnaAdmin", FormMethod.Get))
+{
+    <text>Search by first name:</text>
+    <br />
+
+    @Html.TextBox("search")
+    <input type="submit" value="Search" />
+}
+
+
+<br />
+<p>
+    <h3>
+        <b>
+            @Html.ActionLink("Add New Staff", "CreateStaff")
+        </b>
+    </h3>
+
+</p>
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Staff_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Fname)  @Html.DisplayNameFor(model => model.First().Lname)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Designation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Division)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Phone_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Role_ID)
+        </th>
+        <th>
+            Action
+        </th>
+        <th></th>
+    </tr>
+
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="3" style="color:red">
+                No Match
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Staff_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fname).ToString().ToUpper() @Html.DisplayFor(modelItem => item.Lname).ToString().ToUpper()
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Designation).ToString().ToUpper()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Division).ToString().ToUpper()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit).ToString().ToUpper()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone_No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email).ToString().ToUpper()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role_ID)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditStaff", new { id = item.Staff_ID }) <br />
+                    @Html.ActionLink("Details", "DetailsStaff", new { id = item.Staff_ID }) <br />
+                    @Html.ActionLink("Delete", "DeleteStaff", new { id = item.Staff_ID })
+                </td>
+            </tr>
+        }
+    }
+</table>
+@Html.PagedListPager(Model, i => Url.Action("IndexStaffAdmin", "HusnaAdmin", new { i, search = Request.QueryString["search"] }),
+new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+

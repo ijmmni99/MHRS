@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PKPMentalHealthRecoveryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="Activity_ID" />
+    </Key>
+    <Property Name="Activity_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Activity_Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Descriptions" Type="varchar(max)" Nullable="false" />
+    <Property Name="Activity_Date" Type="datetime" Nullable="false" />
+    <Property Name="Activity_Status" Type="varchar" MaxLength="20" />
+    <Property Name="Activity_Image" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Activity_Staff">
+    <Key>
+      <PropertyRef Name="Activity_Staff_ID" />
+    </Key>
+    <Property Name="Activity_Staff_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Staff_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Activity_ID" Type="bigint" Nullable="false" />
+    <Property Name="Staff_Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Activity_Student">
+    <Key>
+      <PropertyRef Name="Activity_Student_ID" />
+    </Key>
+    <Property Name="Activity_Student_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Student_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Activity_ID" Type="bigint" Nullable="false" />
+    <Property Name="Student_Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Attend" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="Chat_ID" />
+    </Key>
+    <Property Name="Chat_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Session_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="255" />
+    <Property Name="Time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DassForm">
+    <Key>
+      <PropertyRef Name="Form_ID" />
+    </Key>
+    <Property Name="Form_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Student_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Result_Stress" Type="bigint" Nullable="false" />
+    <Property Name="Result_Anxiety" Type="bigint" Nullable="false" />
+    <Property Name="Result_Depression" Type="bigint" Nullable="false" />
+    <Property Name="Condition" Type="varchar" MaxLength="100" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogBook">
+    <Key>
+      <PropertyRef Name="LogBook_ID" />
+    </Key>
+    <Property Name="LogBook_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Session_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Date_Post" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Meeting_Record">
+    <Key>
+      <PropertyRef Name="Meeting_ID" />
+    </Key>
+    <Property Name="Meeting_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Session_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Topic" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Discussion" Type="varchar(max)" />
+    <Property Name="Meet_Date" Type="datetime" />
+    <Property Name="Patient_Status" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Question_DassForm">
+    <Key>
+      <PropertyRef Name="QDS_ID" />
+    </Key>
+    <Property Name="QDS_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Form_ID" Type="bigint" Nullable="false" />
+    <Property Name="Student_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Q1_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q2_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q3_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q4_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q5_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q6_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q7_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q8_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q9_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q10_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q11_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q12_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q13_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q14_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q15_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q16_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q17_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q18_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q19_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q20_Value" Type="bigint" Nullable="false" />
+    <Property Name="Q21_Value" Type="bigint" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Recommended_Activity">
+    <Key>
+      <PropertyRef Name="RA_ID" />
+    </Key>
+    <Property Name="RA_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Session_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Activity_ID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Role_ID" />
+    </Key>
+    <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Permission" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="Schedule_ID" />
+    </Key>
+    <Property Name="Schedule_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Student_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Descriptions" Type="varchar(max)" />
+    <Property Name="Day" Type="varchar" MaxLength="20" />
+    <Property Name="Time_Start" Type="datetime" />
+    <Property Name="Time_End" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Session">
+    <Key>
+      <PropertyRef Name="Session_ID" />
+    </Key>
+    <Property Name="Session_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Student_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Staff_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Date_Start" Type="datetime" Nullable="false" />
+    <Property Name="Date_End" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+    <Property Name="End_status" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Staff_ID" />
+    </Key>
+    <Property Name="Staff_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Fname" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Lname" Type="varchar" MaxLength="225" Nullable="false" />
+    <Property Name="Designation" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Division" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Unit" Type="varchar" MaxLength="255" />
+    <Property Name="Phone_No" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Role_ID" Type="int" Nullable="false" />
+    <Property Name="Staff_Image" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Student_ID" />
+    </Key>
+    <Property Name="Student_ID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Fname" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Lname" Type="varchar" MaxLength="225" Nullable="false" />
+    <Property Name="Faculty" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Course" Type="varchar" MaxLength="20" />
+    <Property Name="Year" Type="varchar" MaxLength="20" />
+    <Property Name="Semester" Type="varchar" MaxLength="20" />
+    <Property Name="Phone_No" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Role_ID" Type="int" Nullable="false" />
+    <Property Name="Student_Image" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Activity___Activ__489AC854">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+    <End Role="Activity_Student" Type="Self.Activity_Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Activity_ID" />
+      </Principal>
+      <Dependent Role="Activity_Student">
+        <PropertyRef Name="Activity_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activity___Activ__4C6B5938">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+    <End Role="Activity_Staff" Type="Self.Activity_Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Activity_ID" />
+      </Principal>
+      <Dependent Role="Activity_Staff">
+        <PropertyRef Name="Activity_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activity___Staff__4B7734FF">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="Activity_Staff" Type="Self.Activity_Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Staff_ID" />
+      </Principal>
+      <Dependent Role="Activity_Staff">
+        <PropertyRef Name="Staff_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activity___Stude__47A6A41B">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Activity_Student" Type="Self.Activity_Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_ID" />
+      </Principal>
+      <Dependent Role="Activity_Student">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Chat__Session_ID__339FAB6E">
+    <End Role="Session" Type="Self.Session" Multiplicity="1" />
+    <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="Session_ID" />
+      </Principal>
+      <Dependent Role="Chat">
+        <PropertyRef Name="Session_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DassForm__Studen__625A9A57">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="DassForm" Type="Self.DassForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_ID" />
+      </Principal>
+      <Dependent Role="DassForm">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LogBook__Session__367C1819">
+    <End Role="Session" Type="Self.Session" Multiplicity="1" />
+    <End Role="LogBook" Type="Self.LogBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="Session_ID" />
+      </Principal>
+      <Dependent Role="LogBook">
+        <PropertyRef Name="Session_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Meeting_R__Sessi__395884C4">
+    <End Role="Session" Type="Self.Session" Multiplicity="1" />
+    <End Role="Meeting_Record" Type="Self.Meeting_Record" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="Session_ID" />
+      </Principal>
+      <Dependent Role="Meeting_Record">
+        <PropertyRef Name="Session_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Question___Form___65370702">
+    <End Role="DassForm" Type="Self.DassForm" Multiplicity="1" />
+    <End Role="Question_DassForm" Type="Self.Question_DassForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DassForm">
+        <PropertyRef Name="Form_ID" />
+      </Principal>
+      <Dependent Role="Question_DassForm">
+        <PropertyRef Name="Form_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Question___Stude__662B2B3B">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Question_DassForm" Type="Self.Question_DassForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_ID" />
+      </Principal>
+      <Dependent Role="Question_DassForm">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Recommend__Activ__6BE40491">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+    <End Role="Recommended_Activity" Type="Self.Recommended_Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Activity_ID" />
+      </Principal>
+      <Dependent Role="Recommended_Activity">
+        <PropertyRef Name="Activity_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Recommend__Sessi__6AEFE058">
+    <End Role="Session" Type="Self.Session" Multiplicity="1" />
+    <End Role="Recommended_Activity" Type="Self.Recommended_Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="Session_ID" />
+      </Principal>
+      <Dependent Role="Recommended_Activity">
+        <PropertyRef Name="Session_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Schedule__Studen__3C34F16F">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_ID" />
+      </Principal>
+      <Dependent Role="Schedule">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Session__Staff_I__30C33EC3">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="Session" Type="Self.Session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Staff_ID" />
+      </Principal>
+      <Dependent Role="Session">
+        <PropertyRef Name="Staff_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Session__Student__2FCF1A8A">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Session" Type="Self.Session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Student_ID" />
+      </Principal>
+      <Dependent Role="Session">
+        <PropertyRef Name="Student_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__Role_ID__10566F31">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Role_ID" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__Role_ID__1332DBDC">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Role_ID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="compareDateForchart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompareMonth" Type="datetime" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="Number" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="Fun_EmployeeInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="Number" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <EntityContainer Name="PKPMentalHealthRecoveryModelStoreContainer">
+    <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Activity_Staff" EntityType="Self.Activity_Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Activity_Student" EntityType="Self.Activity_Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DassForm" EntityType="Self.DassForm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LogBook" EntityType="Self.LogBook" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Meeting_Record" EntityType="Self.Meeting_Record" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Question_DassForm" EntityType="Self.Question_DassForm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recommended_Activity" EntityType="Self.Recommended_Activity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Activity___Activ__489AC854" Association="Self.FK__Activity___Activ__489AC854">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="Activity_Student" EntitySet="Activity_Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activity___Activ__4C6B5938" Association="Self.FK__Activity___Activ__4C6B5938">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="Activity_Staff" EntitySet="Activity_Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activity___Staff__4B7734FF" Association="Self.FK__Activity___Staff__4B7734FF">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Activity_Staff" EntitySet="Activity_Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activity___Stude__47A6A41B" Association="Self.FK__Activity___Stude__47A6A41B">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Activity_Student" EntitySet="Activity_Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Chat__Session_ID__339FAB6E" Association="Self.FK__Chat__Session_ID__339FAB6E">
+      <End Role="Session" EntitySet="Session" />
+      <End Role="Chat" EntitySet="Chat" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DassForm__Studen__625A9A57" Association="Self.FK__DassForm__Studen__625A9A57">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="DassForm" EntitySet="DassForm" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LogBook__Session__367C1819" Association="Self.FK__LogBook__Session__367C1819">
+      <End Role="Session" EntitySet="Session" />
+      <End Role="LogBook" EntitySet="LogBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Meeting_R__Sessi__395884C4" Association="Self.FK__Meeting_R__Sessi__395884C4">
+      <End Role="Session" EntitySet="Session" />
+      <End Role="Meeting_Record" EntitySet="Meeting_Record" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Question___Form___65370702" Association="Self.FK__Question___Form___65370702">
+      <End Role="DassForm" EntitySet="DassForm" />
+      <End Role="Question_DassForm" EntitySet="Question_DassForm" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Question___Stude__662B2B3B" Association="Self.FK__Question___Stude__662B2B3B">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Question_DassForm" EntitySet="Question_DassForm" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Recommend__Activ__6BE40491" Association="Self.FK__Recommend__Activ__6BE40491">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="Recommended_Activity" EntitySet="Recommended_Activity" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Recommend__Sessi__6AEFE058" Association="Self.FK__Recommend__Sessi__6AEFE058">
+      <End Role="Session" EntitySet="Session" />
+      <End Role="Recommended_Activity" EntitySet="Recommended_Activity" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Schedule__Studen__3C34F16F" Association="Self.FK__Schedule__Studen__3C34F16F">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Schedule" EntitySet="Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Session__Staff_I__30C33EC3" Association="Self.FK__Session__Staff_I__30C33EC3">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Session" EntitySet="Session" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Session__Student__2FCF1A8A" Association="Self.FK__Session__Student__2FCF1A8A">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Session" EntitySet="Session" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__Role_ID__10566F31" Association="Self.FK__Staff__Role_ID__10566F31">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__Role_ID__1332DBDC" Association="Self.FK__Student__Role_ID__1332DBDC">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Scripts/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="~/Scripts/css/fontawesome.css">
+    <link rel="stylesheet" href="~/Scripts/css/style.css">
+    <link rel="stylesheet" href="~/Scripts/css/owl.css">
+</head>
+<body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Header -->
+                <header id="header">
+                    <div class="logo">
+                        <a href="index.html">Mental Health Recovery</a>
+                    </div>
+                </header>
+
+                <!-- Banner -->
+                <section class="main-banner">
+                    @RenderBody()
+                </section>
+
+                <!-- Services -->
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar">
+
+            <div class="inner">
+
+
+                <!-- Menu -->
+                <nav id="menu">
+                    <ul>
+                        <li style="color:white">Navigation</li>
+                        <li></li>
+                        <li><a href="@Url.Action("studenthomepage", "HaoKeatHome", new { id = Model.Student_ID })" class="elements">Profile</a></li>
+                        <li><a href="@Url.Action("Sessions", "Home", new { studentid = Model.Student_ID })" class="elements">Counseling Session</a></li>
+                        <li><a href="@Url.Action("DassForm", "FarzanaDass", new { studentid = Model.Student_ID })" class="elements">Dass Form</a></li>
+                        <li><a href="@Url.Action("List_Activity", "Student", new { studentid = Model.Student_ID })" class="elements">Activities</a></li>
+                        <li><a href="@Url.Action("index", "HaoKeatHome")" class="elements">Log Out</a></li>
+                    </ul>
+                </nav>
+
+                <div class="featured-posts">
+                    <div class="heading">
+                        <h2>Featured Activity</h2>
+                    </div>
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var i in ViewBag.Feature)
+                        {
+                            string imageBase64 = Convert.ToBase64String(i.Activity_Image);
+                            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+
+                            <a href="@Url.Action("List_Activity", "Student",new { studentid = Model.Student_ID })">
+
+                                <div class="featured-item">
+                                    <img src="@imageSrc" alt="featured one">
+                                    <p>@i.Activity_Name</p>
+                                </div>
+                            </a>
+                        }
+
+                    </div>
+                </div>
+
+                <!-- Start Footer  -->
+                <footer id="footer">
+                    <p class="copyright">
+                        Copyright &copy; 2020
+                    </p>
+                </footer>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- End Footer  -->
+    <!-- End copyright  -->
+    <!-- ALL JS FILES -->
+    <script src="~/Scripts/js/jquery.min.js"></script>
+    <script src="~/Scripts/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Scripts/js/browser.min.js"></script>
+    <script src="~/Scripts/js/breakpoints.min.js"></script>
+    <script src="~/Scripts/js/transition.js"></script>
+    <script src="~/Scripts/js/owl-carousel.js"></script>
+    <script src="~/Scripts/js/custom.js"></script>
+</body>
+</html>

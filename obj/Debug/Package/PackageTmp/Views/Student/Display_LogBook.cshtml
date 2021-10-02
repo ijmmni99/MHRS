@@ -1,0 +1,43 @@
+﻿@model MHRS.Models.LogBook
+
+@{
+    ViewBag.Title = "Display_LogBook";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LogBook</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Post Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Post)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="primary-button col-md-12">
+    @Html.ActionLink("Back", "LogBook", new { id = Model.Session_ID, currentUser = "student" }, new { @class = "button" })
+    @Html.ActionLink("Edit", "Edit_LogBook", new { id = Model.LogBook_ID }, new { @class = "button" })
+</div>

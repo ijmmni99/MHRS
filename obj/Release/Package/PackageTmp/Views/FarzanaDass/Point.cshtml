@@ -1,0 +1,71 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+		window.onload = function ()
+		{
+			var chart = new CanvasJS.Chart("chartContainer",
+				{
+					animationEnabled: true,
+					theme: "light1", //, "dark1", "dark2"
+					exportEnabled: true,
+					title:
+					{
+                        text: "Result Student Condition Based On DASS Form"
+					},
+					data:
+						[{
+                            type: "column",
+                            dataPoints:  @Html.Raw(ViewBag.Points)
+						}]
+				});
+			chart.render();
+		}
+    </script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
+    @using (Html.BeginForm("Point", "FarzanaDass", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <label for="month">Month</label>
+
+        <select name="month" id="month">
+            <option value="">All</option>
+            <option value="January">January</option>
+            <option value="Febuary">Febuary</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="Jun">Jun</option>
+            <option value="July">July</option>
+            <option value="Ogos">Ogos</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+
+        /*<label for="year">Year</label>
+        <select name="year" id="year">
+
+            <option value="">All</option>
+
+            @foreach (var i in ViewBag.P)
+            {
+                <option value="@i.Date.Year">@i.Date.Year</option>
+            }
+
+        </select>*/
+
+        <button type="submit">Filter</button>
+    }
+
+    <br /><br />
+
+
+</body>
+</html>

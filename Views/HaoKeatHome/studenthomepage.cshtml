@@ -1,0 +1,95 @@
+﻿@model MHRS.Models.Student
+@{
+    ViewBag.Title = "Student";
+    Layout = "~/Views/studentlayout.cshtml";
+    @Html.Raw(TempData["msg"]);
+}
+
+
+<h2>Student Profile</h2>
+<div class="row">
+    <section class="col-md-6">
+
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dt>
+                NAME :
+            </dt>
+            <dd>
+                @Model.Fname.ToUpper()   @Model.Lname.ToUpper()
+            </dd>
+            <br>
+            <dt>
+                STUDENT MATRIC :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Student_ID)
+            </dd>
+            <br>
+            <dt>
+                FACULTY :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Faculty)
+            </dd>
+            <br>
+            <dt>
+                COURSE :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Course)
+            </dd>
+            <br>
+            <dt>
+                YEAR :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+            <br>
+            <dt>
+                SEMESTER :
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Semester)
+            </dd>
+            <br>
+            <dt>
+                PHONE NUMBER
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Phone_No)
+            </dd>
+            <br>
+            <dt>
+                EMAIL
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+
+        </dl>
+    </section>
+    <section class="col-md-4">
+        <dd>
+            @if (Model.Student_Image != null)
+            {
+                string imageBase64 = Convert.ToBase64String(Model.Student_Image);
+                string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                <img src="@imageSrc" style="width: 70%" />
+            }
+            else
+            {
+                <img src="~/Scripts/images/images.png" />
+            }
+
+
+        </dd>
+
+
+    </section>
+</div>
+
+@Html.ActionLink("Edit Profile", "studentedit", new { id = Model.Student_ID })

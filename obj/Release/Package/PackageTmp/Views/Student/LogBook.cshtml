@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MHRS.Models.LogBook>
+
+@{
+    ViewBag.Title = "LogBook";
+    @Html.Raw(TempData["msg"]);
+}
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Log Book</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.isStudent)
+{
+    <p>@Html.ActionLink("What's on your mind?", "Create_LogBook", new {id = ViewBag.SessionID})</p>
+}
+<br />
+<h4>@ViewBag.StudentName</h4>
+
+<section>
+    <div class="container-fluid primary-button">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="default-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Post Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Date_Post)</td>
+                                    <td>
+                                        @Html.ActionLink("View", "Display_LogBook", new { id = item.LogBook_ID, currentuser = ViewBag.currentuser }, new { @class = "button" })
+                                        @Html.ActionLink("Edit", "Edit_LogBook", new { id = item.LogBook_ID, currentuser = ViewBag.currentuser }, new { @class = "button" })
+                                        @Html.ActionLink("Delete", "Delete_LogBook", new { id = item.LogBook_ID, currentusers = ViewBag.currentuser }, new { @class = "button" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

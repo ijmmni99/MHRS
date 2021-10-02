@@ -1,0 +1,132 @@
+﻿@model IEnumerable<MHRS.Models.DassForm>
+
+@{
+    ViewBag.Title = "Report Depression Anxiety Stress (DASS) Student";
+}
+
+
+
+<h2>@ViewBag.Title</h2>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+<div class="jumbotron">
+    <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $.getJSON("/FarzanaDass/GetData", function (data) {
+
+
+
+            Highcharts.chart('container',
+                {
+                    chart:
+                    {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title:
+                    {
+                        text: 'Result Student Condition Based On DASS Form'
+                    },
+                    tooltip:
+                    {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions:
+                    {
+                        pie:
+                        {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels:
+                            {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style:
+                                {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series:
+                        [{
+                            name: 'Condition',
+                            colorByPoint: true,
+                            data:
+                                [{
+                                    name: 'Stress',
+                                    y: data.Stress
+                                },
+                                {
+                                    name: 'Anxiety',
+                                    y: data.Anxiety
+                                },
+                                {
+                                    name: 'Depression',
+                                    y: data.Depression
+                                },
+                                {
+                                    name: 'Normal',
+                                    y: data.Normal
+                                }]
+                        }]
+                });
+        });
+    });
+
+
+</script>
+
+<br />
+<div class="primary-button">
+    @Html.ActionLink("Report By Month", "Point", new { id = Session["staffid"].ToString()})
+</div>
+<br />
+<table>
+    <tr>
+        <th>
+            Student Name
+        </th>
+        <th>
+            Condition
+        </th>
+        <th>
+            Date
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Fname) @Html.DisplayFor(modelItem => item.Student.Lname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+
+            <td>
+
+                @Html.ActionLink("Details", "DetailsGenerateReport", new { id = item.Form_ID })
+            </td>
+        </tr>
+    }
+
+</table>

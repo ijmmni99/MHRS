@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MHRS.Models.Activity_Staff>
+
+@{
+    ViewBag.Title = "List_Activity_Staff";
+    @Html.Raw(TempData["msg"]);
+}
+
+<h2>Staff List</h2>
+
+<p>
+    @Html.ActionLink("Add more staff", "Add_Activity_Staff")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Activity Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Staff.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staff_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activity.Activity_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staff.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete_Activity_Staff", new { id = item.Activity_Staff_ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="primary-button pull-right">
+    @Html.ActionLink("Submit Activity", "Activity", null, new { @class = "btn", onclick = "return alert('Successfully Register Activity');" })
+</div>

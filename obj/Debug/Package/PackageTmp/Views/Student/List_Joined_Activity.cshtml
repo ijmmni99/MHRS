@@ -1,0 +1,57 @@
+﻿@model List<MHRS.Models.Activity_Student>
+
+@{
+    ViewBag.Title = "List_Joined_Activity";
+    @Html.Raw(TempData["msg"]);
+}
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Joined : Upcoming Activity</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@foreach (var item in Model)
+{
+<!-- Left Image -->
+        <section class="left-image">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        @if (item.Activity.Activity_Image != null)
+                        {
+                            string imageBase64 = Convert.ToBase64String(item.Activity.Activity_Image);
+                            string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                            <img src="@imageSrc" style="width: 70%"/>
+                        }
+                        else
+                        {
+                            <img src="~/Scripts/images/images.png" />
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        <div class="right-content">
+                            <h4>@item.Activity.Activity_Name</h4>
+                            <p>@item.Activity.Descriptions</p>
+                            <p>Date : @item.Activity.Activity_Date</p>
+                            <br />
+                            <br />
+                            <p>Counselor</p>
+                            @foreach (var x in item.Activity.Activity_Staff)
+                            {
+                                <p>@x.DisplayName</p>
+                                <p>Contact : @x.Staff.Phone_No</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+}
+
+
